@@ -1,3 +1,5 @@
+# PubNub Access Manager (PAM)
+
 PubNub Access Manager (PAM) provides fine-grained access controls to PubNub
 Data Streams and DataSync Objects. It presents a minimal REST API for secure
 administration tasks, and transparently protects Data Stream and DataSync
