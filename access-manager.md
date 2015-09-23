@@ -23,11 +23,12 @@ Both ```auth``` and ```channel``` accept comma-separated lists.
 
 ## Request Format
 
-    HTTP GET
+    HTTPS GET
      
-    https://pubsub.pubnub.com/v1/auth/grant/sub-key/{subscribe-key}?signature=<sign>&auth={auth-key}
+    https://pubsub.pubnub.com/v1/auth/grant/sub-key/{subscribe-key}?signature=<sign>&auth={auth-key}    
     
-    
+In this Request, the auth-key is the client that has permissions to modify Access Manager permissions, not the auth-key you want to modify permissions on. 
+The one you are changing permissions for is within the <sign> parameters.
 
 #### Computing the Signature for Request - <sign> QS Param
 
