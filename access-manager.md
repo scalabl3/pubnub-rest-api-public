@@ -21,6 +21,15 @@ method (`grant`, `revoke`, or `granted`) in the following format string:
 
     "{sub_key}\n{pub_key}\n{method}\n{query_string}"
 
+Here is a full example message:
+
+    {subscribe-key}
+    {publish-key}
+    grant
+    auth={auth-key}&channel=my_channel&r=1&w=1&timestamp=123456789&ttl=1440
+
+##### Formatting
+
 * Query string parameters must be sorted lexicographically (case-sensitive) by
 key. 
 
@@ -42,12 +51,6 @@ And here is the same query string after sorting and percent-encoding:
 
     PoundsSterling=%C2%A313.37&auth=joker&r=1&w=1&timestamp=123456789&ttl=60
 
-Here is a full example message:
-
-    {subscribe-key}
-    {publish-key}
-    grant
-    auth={auth-key}&channel=my_channel&r=1&w=1&timestamp=123456789&ttl=1440
 
 Let's imagine the demo account's secret key is:
 
