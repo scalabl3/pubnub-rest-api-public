@@ -14,20 +14,25 @@ their own sections; REST API, and ACL Enforcement.
 
 #### Computing the Signature for Request
 
-`<sign>` is computed using ```HMAC+SHA256``` with the user's secret key as the signing
-key, and the request string as the message. The request string is composed of
+`<sign>` is computed using ```HMAC+SHA256``` with the user's ```secret key``` as the 
+signing key, and the request string as the message. The request string is composed of
 the request query parameters concatenated to the subscribe key, publish key, and
 method (`grant`, `revoke`, or `granted`) in the following format string:
 
     "{sub_key}\n{pub_key}\n{method}\n{query_string}"
 
-Query string parameters must be sorted lexicographically (case-sensitive) by
-key. Secondly, all characters in the query string parameters must be
+* Query string parameters must be sorted lexicographically (case-sensitive) by
+key. 
+
+* Secondly, all characters in the query string parameters must be
 percent-encoded *except* alphanumeric, hyphen, underscore, and period; E.g. all
-characters matching the RegExp `/[^0-9a-zA-Z\-_\.]/`. Space characters must be
-replaced by `%20` (NOT `+` character). Each key-value pair must be separated by
-ampersand characters. Unicode characters must be broken up into UTF-8 encoded
-bytes before percent-encoding.
+characters matching the RegExp `/[^0-9a-zA-Z\-_\.]/`. 
+
+* Space characters must be replaced by `%20` (NOT `+` character). 
+
+* Each key-value pair must be separated by ampersand characters. 
+
+* Unicode characters must be broken up into UTF-8 encoded bytes before percent-encoding.
 
 Here is an example of a query string containing unicode characters:
 
