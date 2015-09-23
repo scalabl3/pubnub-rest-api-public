@@ -10,16 +10,16 @@ their own sections; REST API, and ACL Enforcement.
 
 * Global Permissions
     
-    Do Not Provide ```auth``` nor ```channel``` in the <sign> query-string parameters
+    > Do Not Provide ```auth``` nor ```channel``` in the <sign> query-string parameters
     
 * Channel Permissions
     
-    Provide only a ```channel``` parameter, but not ```auth``` parameter, this then sets permissions on the channel itself
+    > Provide only a ```channel``` parameter, but not ```auth``` parameter, this then sets permissions on the channel itself
      overriding any auth-key permissions
      
 * AuthKey Permissions
     
-    Provide both ```auth``` and ```channel``` parameters to set the permissions for one or more channels and one or more auth-keys
+    > Provide both ```auth``` and ```channel``` parameters to set the permissions for one or more channels and one or more auth-keys
     
 Both ```auth``` and ```channel``` accept comma-separated lists.
 
