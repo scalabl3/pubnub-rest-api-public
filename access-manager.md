@@ -45,13 +45,13 @@ characters matching the RegExp `/[^0-9a-zA-Z\-_\.]/`.
 
 * Unicode characters must be broken up into UTF-8 encoded bytes before percent-encoding.
 
-Here is an example of a query string containing unicode characters:
+Here is an example of a query string containing unicode characters (PoundSterling is just there to show sorting):
 
     auth=joker&r=1&w=1&ttl=60&timestamp=123456789&PoundsSterling=£13.37
 
-And here is the same query string after sorting and percent-encoding:
+And here is the same query string after ***sorting and percent-encoding*** (PoundSterling is just there to show sorting):
 
-    PoundsSterling=%C2%A313.37&auth=joker&r=1&w=1&timestamp=123456789&ttl=60
+    PoundsSterling=%C2%A313.37&auth=joker&r=1&timestamp=123456789&ttl=60&w=1
 
 
 Let's imagine the demo account's secret key is:
