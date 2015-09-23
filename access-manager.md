@@ -10,7 +10,7 @@ their own sections; REST API, and ACL Enforcement.
 
 * Global Permissions
     
-    > Do Not Provide ```auth``` nor ```channel``` in the <sign> query-string parameters
+    > Do Not Provide ```auth``` nor ```channel``` in the /<sign/> query-string parameters
     
 * Channel Permissions
     
