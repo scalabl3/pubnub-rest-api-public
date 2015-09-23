@@ -30,7 +30,7 @@ Here is a full example message:
     grant
     auth={auth-key}&channel=my_channel&r=1&w=1&timestamp=123456789&ttl=1440
 
-##### Formatting
+##### Required Formatting
 
 * Query string parameters must be sorted lexicographically (case-sensitive) by
 key. 
