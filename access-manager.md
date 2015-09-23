@@ -6,6 +6,21 @@ administration tasks, and transparently protects Data Stream and DataSync
 resource access. This document divides these two responsibilities clearly into
 their own sections; REST API, and ACL Enforcement.
 
+## General Information
+
+* Global Permissions
+    Do Not Provide ```auth``` nor ```channel``` in the <sign> query-string parameters
+    
+* Channel Permissions
+    Provide only a ```channel``` parameter, but not ```auth``` parameter, this then sets permissions on the channel itself
+     overriding any auth-key permissions
+     
+* AuthKey Permissions
+    Provide both ```auth``` and ```channel``` parameters to set the permissions for one or more channels and one or more authkeys
+    
+Both ```auth``` and ```channel``` accept comma-separated lists.
+
+
 ## Request Format
 
     HTTP GET
@@ -28,9 +43,9 @@ Here is a full example message:
     {subscribe-key}
     {publish-key}
     grant
-    auth={auth-key}&channel=my_channel&r=1&w=1&timestamp=123456789&ttl=1440
+    auth={auth-key-to-be-updated}&channel=my_channel&r=1&w=1&timestamp=123456789&ttl=1440
 
-##### Required Formatting
+##### Query String Required Formatting
 
 * Query string parameters must be sorted lexicographically (case-sensitive) by
 key. 
@@ -45,14 +60,15 @@ characters matching the RegExp `/[^0-9a-zA-Z\-_\.]/`.
 
 * Unicode characters must be broken up into UTF-8 encoded bytes before percent-encoding.
 
-Here is an example of a query string containing unicode characters (PoundSterling is just there to show sorting):
+* Final signed value should be Base64 encoded using the "URL safe" characters `-` and `_` replacing `+` and `/` respectively.
 
-    auth=joker&r=1&w=1&ttl=60&timestamp=123456789&PoundsSterling=£13.37
+Here is an example of a query string containing unicode characters (PoundsSterling is just there to demonstrate encoding/sorting):
 
-And here is the same query string after ***sorting and percent-encoding*** (PoundSterling is just there to show sorting):
+    auth={auth-key-to-be-updated}&r=1&w=1&ttl=60&timestamp=123456789&PoundsSterling=£13.37
+
+And here is the same query string after ***sorting and percent-encoding*** (PoundsSterling is just there to demonstrate encoding/sorting):
 
     PoundsSterling=%C2%A313.37&auth=joker&r=1&timestamp=123456789&ttl=60&w=1
-
 
 Let's imagine the demo account's secret key is:
 
@@ -66,7 +82,11 @@ characters `-` and `_` replacing `+` and `/` respectively:
 This signature is then percent-encoded according to standard query parameter
 percent-encoding practices. E.g. the `=` character is transformed into `%3D`.
 
+    v2rgQQ1eFzk8omugFV9V1_eKRUvvMv9jyC9Z-L1ogdw%3D
+
 ## Response
+
+Depending on the parameters provided (channel name, auth
 
     {
         "status": 200,
