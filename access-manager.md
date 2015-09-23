@@ -10,7 +10,7 @@ their own sections; REST API, and ACL Enforcement.
 
 * Global Permissions
     
-    > Do Not Provide ```auth``` nor ```channel``` in the /<sign/> query-string parameters
+    > Do Not Provide ```auth``` nor ```channel``` in the {signed-content} query-string parameters
     
 * Channel Permissions
     
@@ -28,19 +28,19 @@ Both ```auth``` and ```channel``` accept comma-separated lists.
 
     HTTPS GET
      
-    https://pubsub.pubnub.com/v1/auth/grant/sub-key/{subscribe-key}?signature=<sign>&auth={auth-key}    
+    https://pubsub.pubnub.com/v1/auth/grant/sub-key/{subscribe-key}?signature={signed-content}&auth={auth-key}    
     
 In this Request, the auth-key is the client that has permissions to modify Access Manager permissions, not the auth-key you want to modify permissions on. 
 The one you are changing permissions for is within the <sign> parameters.
 
-#### Computing the Signature for Request - <sign> QS Param
+#### Computing the Signature for Request - {signed-content} QS Param
 
-`<sign>` is computed using ```HMAC+SHA256``` with the user's ```secret key``` as the 
-signing key, and the request string as the message. The request string is composed of
+{signed-content} is computed using ```HMAC + SHA256``` with the associated PubNub ```secret key``` 
+as the signing key, and the request string as the message. The request string is composed of
 the request query parameters concatenated to the subscribe key, publish key, and
 method (`grant`, `revoke`, or `granted`) in the following format string:
 
-    "{sub_key}\n{pub_key}\n{method}\n{query_string}"
+    "{sub_key}\n{pub_key}\n{method}\n{access-manager-request-string}"
 
 Here is a full example message:
 
@@ -49,9 +49,9 @@ Here is a full example message:
     grant
     auth={auth-key-to-be-updated}&channel=my_channel&r=1&w=1&timestamp=123456789&ttl=1440
 
-##### Query String Required Formatting
+##### Access Manager Request String Required Formatting
 
-* Query string parameters must be sorted lexicographically (case-sensitive) by
+* {access-manager-request-string} parameters must be sorted lexicographically (case-sensitive) by
 key. 
 
 * Secondly, all characters in the query string parameters must be
