@@ -4,7 +4,7 @@ administration tasks, and transparently protects Data Stream and DataSync
 resource access. This document divides these two responsibilities clearly into
 their own sections; REST API, and ACL Enforcement.
 
-### Request
+## Request Format
 
     HTTP GET
      
@@ -12,9 +12,9 @@ their own sections; REST API, and ACL Enforcement.
     
     
 
-### Computing the Signature for Request
+#### Computing the Signature for Request
 
-`<sign>` is computed using HMAC+SHA256 with the user's secret key as the signing
+`<sign>` is computed using ```HMAC+SHA256``` with the user's secret key as the signing
 key, and the request string as the message. The request string is composed of
 the request query parameters concatenated to the subscribe key, publish key, and
 method (`grant`, `revoke`, or `granted`) in the following format string:
@@ -56,7 +56,7 @@ characters `-` and `_` replacing `+` and `/` respectively:
 This signature is then percent-encoded according to standard query parameter
 percent-encoding practices. E.g. the `=` character is transformed into `%3D`.
 
-### Response
+## Response
 
     {
         "status": 200,
