@@ -12,7 +12,7 @@ their own sections; REST API, and ACL Enforcement.
     
     
 
-#### Computing the Signature for Request
+#### Computing the Signature for Request - <sign> QS Param
 
 `<sign>` is computed using ```HMAC+SHA256``` with the user's ```secret key``` as the 
 signing key, and the request string as the message. The request string is composed of
